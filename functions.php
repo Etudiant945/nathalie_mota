@@ -1,9 +1,10 @@
 <?php
-// Enregistrer les emplacements des menus
-function register_my_menus() {
-    register_nav_menus( array(
-        'main-menu' => __( 'Menu principal', 'text-domain' ),
-    ) );
+function mon_theme_register_menus() {
+    register_nav_menus(
+        array(
+            'header_menu' => 'Menu Principal de l\'En-tête', // Nom de l'emplacement du menu
+        )
+    );
 }
-add_action( 'after_setup_theme', 'register_my_menus' );
+add_action('after_setup_theme', 'mon_theme_register_menus');
 ?>
