@@ -5,3 +5,5 @@
 <?php wp_footer(); ?>
 </body>
 </html>
+  <!-- Contenu actuel du footer -->
+  <?php get_template_part('templates_part/contact_modal'); ?>

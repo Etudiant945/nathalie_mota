@@ -8,3 +8,25 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: nathalie_mota
 Tags: custom, theme
 */
+
+.modal {
+    display: none; /* Masque la modale par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    z-index: 1000; /* Place la modale au-dessus des autres éléments */
+  }
+  
+  .modal-content {
+    position: relative;
+    margin: 10% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 600px;
+    background: #fff;
+    border-radius: 8px;
+  }
+  
