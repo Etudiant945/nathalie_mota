@@ -10,9 +10,19 @@ add_action('after_setup_theme', 'mon_theme_register_menus');
 ?>
 
 <?php
-function enqueue_custom_scripts() {
-    // Chargement du script JS pour la modale
+// Fonction pour ajouter les scripts et les styles
+function ajouter_styles_et_scripts() {
+    // Ajouter le fichier CSS
+    wp_enqueue_style(
+        'theme-style', // Identifiant unique pour ce style
+        get_template_directory_uri() . '/style.css', // Le chemin du fichier CSS
+        array(), // Les dépendances (aucune ici)
+        null, // Version (optionnel, vous pouvez utiliser une version ici)
+        'all' // Media (ex: 'all', 'screen', 'print')
+    );
+
+    // Charger le script JS pour la modale
     wp_enqueue_script('custom-modal-script', get_template_directory_uri() . '/js/modal.js', array('jquery'), null, true);
 }
-add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
+add_action('wp_enqueue_scripts', 'ajouter_styles_et_scripts');
 ?>
