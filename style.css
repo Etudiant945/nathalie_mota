@@ -9,8 +9,76 @@ Text Domain: nathalie_mota
 Tags: custom, theme
 */
 
+/* font-family */
+* {
+    font-family: 'Poppins', sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    margin: 0;
+}
+
+h1, h2, h3 {
+    font-family: 'SpaceMono', sans-serif;
+}
+p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* header */
+header {
+    text-transform: uppercase;
+}
+
+.header-wrapper {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    width:35%;
+}
+
+.header-content {
+    display:flex;
+}
+
+.menu {
+    display: flex;
+    margin-right: 45px;
+}
 
 
+
+.menu-item {
+    margin-left: 45px;
+}
+.menu-item a {
+    font-family: 'SpaceMono', sans-serif;
+    font-size:16px;
+    color:black;
+}
+/* modal de contact */
+.open-contact-modal {
+    border: none;
+    background-color: transparent;
+    font-family: 'SpaceMono', sans-serif;
+    font-size: 16px;   
+    padding-top: 0px;
+}
 .modal {
     display: none; /* Masque la modale par défaut */
     position: fixed;
@@ -23,15 +91,63 @@ Tags: custom, theme
   }
   
   .modal-content {
-    position: relative;
+    display:flex;
+    align-items: center;
+    justify-content: center;
     margin: 10% auto;
     padding: 20px;
     width: 90%;
     max-width: 600px;
     background: #fff;
-    border-radius: 8px;
+    border:5px solid black;
   }
-  
+.form-label {
+    font-weight: 500;
+    font-size:12px
+}
+.formulaire {
+    border:1px solid #B8BBC2;
+    padding:10px;
+    width: 100%;
+    border-radius: 8px;
+    outline: #B8BBC2;
+    margin-top:5px;
+}
+
+.submit-button {
+    border: 0px;
+    width: 107%;
+    background-color: #D8D8D8;
+    padding:15px 8px ;
+
+}
+
+/*Footer*/
+
+.footer-menu-list {
+    display:flex;
+    justify-content: space-evenly;
+}
+
+#menu-item-71, #menu-item-72, #menu-item-73 {
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /* Définir la police SpaceMono Regular */
 @font-face {

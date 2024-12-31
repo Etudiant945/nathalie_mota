@@ -26,3 +26,22 @@ function ajouter_styles_et_scripts() {
 }
 add_action('wp_enqueue_scripts', 'ajouter_styles_et_scripts');
 ?>
+
+
+<?php
+function display_contact_button() {
+    echo '<button class="open-contact-modal">CONTACT</button>';
+}
+
+
+?>
+
+<?php
+function register_my_menus() {
+    register_nav_menus(array(
+        'footer-menu' => __('Footer Menu'),
+    ));
+}
+add_action('init', 'register_my_menus');
+?>
+
