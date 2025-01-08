@@ -44,7 +44,7 @@ header {
 
 .header-wrapper {
     display:flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -71,6 +71,34 @@ header {
     font-size:16px;
     color:black;
 }
+/* photo Hero */
+
+.hero-section {
+    position: relative;
+
+}
+.hero-img {
+    width: 100%;
+    height: 965px;;
+
+}
+.hero-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.hero-title {
+    font-weight: 700;
+    font-style: italic;
+    font-size: 96px;
+    margin: 0 auto;
+    color: transparent; /* Rendu de l'intérieur transparent */
+    -webkit-text-stroke: 2px white; /* Contour blanc pour les navigateurs Webkit */
+    text-transform: uppercase; /* Met tout en majuscules */
+    text-align: center;
+}
 /* modal de contact */
 .open-contact-modal {
     border: none;
@@ -78,52 +106,189 @@ header {
     font-family: 'SpaceMono', sans-serif;
     font-size: 16px;   
     padding-top: 0px;
+    padding-right:40px;
 }
 .modal {
     display: none; /* Masque la modale par défaut */
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
     z-index: 1000; /* Place la modale au-dessus des autres éléments */
+    
   }
-  
+
   .modal-content {
-    display:flex;
-    align-items: center;
-    justify-content: center;
     margin: 10% auto;
-    padding: 20px;
-    width: 90%;
-    max-width: 600px;
+    padding: 0;
+    width: 100%;
+    max-width: 700px;
     background: #fff;
     border:5px solid black;
-  }
+    overflow: hidden;
+}
+
 .form-label {
     font-weight: 500;
     font-size:12px
 }
+
+.looping-title {
+    position: relative;
+    display: block;
+    width: 100%; /* Limite à la largeur de son conteneur parent */
+    font-size: 70px;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height:68px;
+    padding: 10px 0 20px 0;
+  }
+
+  .line {
+    position: relative;
+  }
+  .line:nth-child(1) {
+    left: -27%; /* Décale la première ligne à gauche */
+  }
+  
+  .line:nth-child(2) {
+    left: -140px; /* La deuxième ligne reste visible dans le conteneur */
+    
+  }
+
 .formulaire {
     border:1px solid #B8BBC2;
     padding:10px;
-    width: 100%;
+    width: 90%;
     border-radius: 8px;
     outline: #B8BBC2;
     margin-top:5px;
 }
-
+.form-container {
+    display: flex;
+    flex-direction: column;  
+    align-items: center;
+}
+#your-message {
+    margin-right: 18px;
+    padding: 25px 10px;
+}
+.form-submit {
+    width: 44%;
+    padding-right: 10px;
+}
 .submit-button {
     border: 0px;
-    width: 107%;
+    width: 100%;
     background-color: #D8D8D8;
     padding:15px 8px ;
 
 }
 
+/* Filtres */
+
+.filters-and-posts-container {
+    display: flex;
+    justify-content: center;
+}
+
+.filters-container {
+    width: 94%;
+    padding-bottom: 1.5em;
+    padding-top: 6em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.category-format-filters {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: calc(50% - 10px);
+    position: relative;
+}
+
+.categories-filter {
+    position:relative;
+    width: fit-content;
+}
+
+.filters-container__photo-filter {
+    width: 260px;
+    height: 40px;
+    padding-left: 20px;
+    padding-right: 30px; /* S'assurer que l'espace à droite est suffisant pour la flèche */
+    background-color: transparent;
+    border: 1.3px solid #B8BBC2;
+    border-radius: 8px;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.36px;
+    color: #000000;
+    text-transform: uppercase;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    z-index: 1; /* Assurez-vous que le select ne soit pas masqué par la flèche */
+}
+
+/* Style du bouton flèche */
+.filters-container__photo-filter__arrow {
+    position: absolute;
+    right: 10px; /* Positionner la flèche à droite du champ de sélection */
+    top: 50%; /* Centrer la flèche verticalement */
+    transform: translateY(-50%); /* Ajuster la flèche pour qu'elle soit centrée verticalement */
+    z-index: 2; /* Assurez-vous que la flèche soit au-dessus du champ de sélection */
+    background: transparent; /* Aucun fond */
+    border: none; /* Aucun bord */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sort-by-date-filter {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* blog */ 
+
+.article-list {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de s'enrouler */
+    justify-content: center;
+    gap: 20px; /* Espacement entre les articles */
+}
+.article-item {
+    width: calc(50% - 50px); /* Ajuste la largeur des éléments pour compenser l'espacement */
+}
+
+.article-image img {
+    width: 100%; /* L'image prend 100% de la largeur du conteneur */
+    height: 495px; /* Hauteur fixe de l'image */
+    max-height: 495px;
+    object-fit: cover; /* Couvre le conteneur sans déformation de l'image */
+    margin-bottom: -7px;
+}
+
 /*Footer*/
 
+
+.footer-bar {
+    background-color: #000; /* Couleur noire */
+    height: 1px; /* Hauteur de la barre */
+    width: 100%; /* Étend la barre sur toute la largeur */
+    margin: 0; /* Supprime les marges */
+    padding: 0; /* Supprime les paddings */
+}
 .footer-menu-list {
     display:flex;
     justify-content: space-evenly;

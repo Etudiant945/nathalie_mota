@@ -1,4 +1,5 @@
 <?php
+//  Pour faire apparaitre le menu du Header 
 function mon_theme_register_menus() {
     register_nav_menus(
         array(
@@ -25,18 +26,30 @@ function ajouter_styles_et_scripts() {
     wp_enqueue_script('custom-modal-script', get_template_directory_uri() . '/js/modal.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'ajouter_styles_et_scripts');
-?>
 
-
-<?php
 function display_contact_button() {
     echo '<button class="open-contact-modal">CONTACT</button>';
 }
+?>
+<?php // appel de ma fonction js pour mon filtre
+function enqueue_custom_scripts() {
+    // Assurez-vous que jQuery est chargé avant votre script
+    wp_enqueue_script('jquery'); // Inclure jQuery si nécessaire
 
-
+    // Charger le script personnalisé
+    wp_enqueue_script(
+        'custom-script', // Identifiant pour le script
+        get_template_directory_uri() . '/js/script.js', // Chemin du script
+        array('jquery'), // Dépendance jQuery
+        null, // Version
+        true // Charger dans le footer
+    );
+}
+add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
 ?>
 
 <?php
+//  Pour faire apparaitre le menu du footer 
 function register_my_menus() {
     register_nav_menus(array(
         'footer-menu' => __('Footer Menu'),
