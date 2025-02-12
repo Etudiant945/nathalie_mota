@@ -10,6 +10,7 @@
 
 <body <?php body_class(); ?>>
     <header>
+
         <div class="container header-wrapper">
             <a href="<?php echo home_url(); ?>">
                 <img class="logo" src="<?php echo get_template_directory_uri(); ?>/images/Logo.png" alt="Logo">
@@ -28,11 +29,6 @@
                 <?php display_contact_button(); ?>
             </div>
         </div>
-
-            
-
-        
-       
         <section class="hero-section">
             <div class="hero-image">
                 <img src="<?php echo esc_url(get_template_directory_uri() . '/images/nathalie-2.jpeg'); ?>" alt="Photo de la foule en plein concert" class="hero-img">

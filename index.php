@@ -5,107 +5,103 @@
         <div class="category-format-filters">
             <!-- Filter Categories -->
             <div class="categories-filter">
-                <form class="filter-column">
-                    <select id="categories" class="filters-container__photo-filter">
+                <form class="filter-column" method="GET">
+                    <select id="categories" name="categorie" class="filters-container__photo-filter" onchange="this.form.submit()">
                         <option value="all" hidden></option>
                         <option value="all" selected>CATÉGORIES</option>
                         <?php
                         $categories = get_terms(array(
-                            "taxonomy" => "categorie", // as in CPT UI
+                            "taxonomy" => "categorie", 
                             "hide_empty" => false,
                         ));
                         foreach ($categories as $categorie) {
-                            echo '<option value="' . $categorie->slug . '">' . mb_convert_case($categorie->name, MB_CASE_TITLE, "UTF-8") . '</option>';
+                            echo '<option value="' . $categorie->slug . '" ' . (isset($_GET['categorie']) && $_GET['categorie'] == $categorie->slug ? 'selected' : '') . '>' . mb_convert_case($categorie->name, MB_CASE_TITLE, "UTF-8") . '</option>';
                         }
                         ?>
                     </select>
                 </form>
-                <!-- Le bouton flèche -->
                 <button type="button" class="filters-container__photo-filter__arrow">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/buttons/arrow-down.png"
-                        alt="flèche vers le bas">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/buttons/arrow-down.png" alt="flèche vers le bas">
                 </button>
             </div>
 
             <!-- Filter Formats -->
             <div class="formats-filter">
-                <form class="filter-column">
-                    <select id="formats" class="filters-container__photo-filter">
+                <form class="filter-column" method="GET">
+                    <select id="formats" name="format" class="filters-container__photo-filter" onchange="this.form.submit()">
                         <option value="all" hidden></option>
                         <option value="all" selected>FORMATS</option>
                         <?php
                         $formats = get_terms(array(
-                            "taxonomy" => "format", // as in CPT UI
+                            "taxonomy" => "format", 
                             "hide_empty" => false,
                         ));
                         foreach ($formats as $format) {
-                            echo '<option value="' . $format->slug . '">' . mb_convert_case($format->name, MB_CASE_TITLE, "UTF-8") . '</option>';
+                            echo '<option value="' . $format->slug . '" ' . (isset($_GET['format']) && $_GET['format'] == $format->slug ? 'selected' : '') . '>' . mb_convert_case($format->name, MB_CASE_TITLE, "UTF-8") . '</option>';
                         }
                         ?>
                     </select>
                 </form>
-                <!-- Le bouton flèche -->
                 <button type="button" class="filters-container__photo-filter__arrow">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/buttons/arrow-down.png"
-                        alt="flèche vers le bas">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/buttons/arrow-down.png" alt="flèche vers le bas">
                 </button>
             </div>
         </div>
 
         <!-- Filter Sort By Date -->
         <div class="sort-by-date-filter">
-            <form class="filter-column">
-                <select id="sort-by-date" class="filters-container__photo-filter">
+            <form class="filter-column" method="GET">
+                <select id="sort-by-date" name="sort" class="filters-container__photo-filter" onchange="this.form.submit()">
                     <option value="all" hidden></option>
                     <option value="all" selected>TRIER PAR</option>
-                    <option value="DESC">Les Plus Récentes</option>
-                    <option value="ASC">Les Plus Anciennes</option>
+                    <option value="DESC" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'DESC') ? 'selected' : ''; ?>>Les Plus Récentes</option>
+                    <option value="ASC" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'ASC') ? 'selected' : ''; ?>>Les Plus Anciennes</option>
                 </select>
-                <!-- Le bouton flèche -->
                 <button type="button" class="filters-container__photo-filter__arrow">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/buttons/arrow-down.png"
-                        alt="flèche vers le bas">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/buttons/arrow-down.png" alt="flèche vers le bas">
                 </button>
             </form>
         </div>
-
     </div>
 </section>
+
 
 <section class="container article-list"> 
 <?php
 // Arguments pour la requête WordPress
 $args = array(
-    'post_type' => 'photo', // Remplacez par votre CPT, ici "photo"
-    'posts_per_page' => 10, // Nombre d'articles à afficher (modifiez si nécessaire)
+    'post_type' => 'photo', 
+    'posts_per_page' => 8, 
 );
 
 // Si un filtre de catégorie est appliqué
 if (isset($_GET['categorie']) && $_GET['categorie'] != 'all') {
     $args['tax_query'][] = array(
-        'taxonomy' => 'categorie', // Taxonomie pour les catégories
-        'field' => 'slug', // Utilisation du slug pour filtrer
-        'terms' => $_GET['categorie'], // Le terme sélectionné
+        'taxonomy' => 'categorie', 
+        'field' => 'slug', 
+        'terms' => sanitize_text_field($_GET['categorie']),
     );
 }
 
 // Si un filtre de format est appliqué
 if (isset($_GET['format']) && $_GET['format'] != 'all') {
     $args['tax_query'][] = array(
-        'taxonomy' => 'format', // Taxonomie pour les formats
-        'field' => 'slug', // Utilisation du slug pour filtrer
-        'terms' => $_GET['format'], // Le format sélectionné
+        'taxonomy' => 'format', 
+        'field' => 'slug', 
+        'terms' => sanitize_text_field($_GET['format']),
     );
 }
 
 // Si un tri par date est appliqué
 if (isset($_GET['sort']) && ($_GET['sort'] == 'ASC' || $_GET['sort'] == 'DESC')) {
-    $args['order'] = $_GET['sort']; // Tri par date
-    $args['orderby'] = 'date'; // Tri basé sur la date
+    $args['order'] = $_GET['sort'];
+    $args['orderby'] = 'date';
 }
 
 // Exécution de la requête
 $query = new WP_Query($args);
+
+
 
 // Si des articles sont trouvés
 if ($query->have_posts()) :
@@ -142,4 +138,4 @@ wp_reset_postdata();
 ?>
 </section>
 
-<?php get_footer(); ?>
+<?php get_footer(); ?> 
