@@ -66,33 +66,32 @@
 </section>
 
 
-<section class="container article-list"> 
+<section class="container article-list" id="article-list"> 
 <?php
 // Arguments pour la requête WordPress
 $args = array(
-    'post_type' => 'photo', 
+    'post_type' => 'photo',
     'posts_per_page' => 8, 
+    'paged' => 1, // On commence à la page 1
 );
 
-// Si un filtre de catégorie est appliqué
+// Si un filtre est appliqué
 if (isset($_GET['categorie']) && $_GET['categorie'] != 'all') {
     $args['tax_query'][] = array(
-        'taxonomy' => 'categorie', 
-        'field' => 'slug', 
+        'taxonomy' => 'categorie',
+        'field' => 'slug',
         'terms' => sanitize_text_field($_GET['categorie']),
     );
 }
 
-// Si un filtre de format est appliqué
 if (isset($_GET['format']) && $_GET['format'] != 'all') {
     $args['tax_query'][] = array(
-        'taxonomy' => 'format', 
-        'field' => 'slug', 
+        'taxonomy' => 'format',
+        'field' => 'slug',
         'terms' => sanitize_text_field($_GET['format']),
     );
 }
 
-// Si un tri par date est appliqué
 if (isset($_GET['sort']) && ($_GET['sort'] == 'ASC' || $_GET['sort'] == 'DESC')) {
     $args['order'] = $_GET['sort'];
     $args['orderby'] = 'date';
@@ -101,41 +100,35 @@ if (isset($_GET['sort']) && ($_GET['sort'] == 'ASC' || $_GET['sort'] == 'DESC'))
 // Exécution de la requête
 $query = new WP_Query($args);
 
-
-
 // Si des articles sont trouvés
 if ($query->have_posts()) :
     while ($query->have_posts()) : $query->the_post();
         ?>
-<article class="article-item">
+        <article class="article-item">
+            <?php 
+            $image = get_field('photo'); 
+            if ($image) : ?>
+                <div class="article-image">
+                    <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
+                </div>
+            <?php else : ?>
+                <p>Pas d'image disponible</p>
+            <?php endif; ?>
 
-    <?php 
-$image = get_field('photo'); // Remplacez 'photo_image' par le nom de votre champ ACF
-
-if ($image) : ?>
-    <div class="article-image">
-        <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
-        <!-- Utilisez l'URL pour l'image -->
-    </div>
-    <?php else : ?>
-    <p>Pas d'image disponible</p>
-    <?php endif; ?>
-
-    <!-- Contenu ou extrait de l'article -->
-    <div class="article-content"><?php the_excerpt(); ?></div>
-</article>
-<?php
-    endwhile;
-
-    // Pagination si nécessaire
-    the_posts_pagination();
+            <div class="article-content"><?php the_excerpt(); ?></div>
+        </article>
+    <?php endwhile; ?>
+    
+    <button id="load-more" class="load-more-btn">Charger plus</button>
+    
+    <?php
 else :
     echo '<p>Aucun article trouvé.</p>';
 endif;
 
-// Réinitialisation des données de la requête après utilisation
 wp_reset_postdata();
 ?>
 </section>
+
 
 <?php get_footer(); ?> 

@@ -70,7 +70,12 @@ header {
     font-family: 'SpaceMono', sans-serif;
     font-size:16px;
     color:black;
+    
 }
+header .menu-item a {
+    white-space: nowrap;
+}
+
 /* photo Hero */
 
 .hero-section {
@@ -98,15 +103,11 @@ header {
     -webkit-text-stroke: 2px white; /* Contour blanc pour les navigateurs Webkit */
     text-transform: uppercase; /* Met tout en majuscules */
     text-align: center;
+    white-space: nowrap;
 }
 /* modal de contact */
 .open-contact-modal {
-    border: none;
-    background-color: transparent;
-    font-family: 'SpaceMono', sans-serif;
-    font-size: 16px;   
-    padding-top: 0px;
-    padding-right:40px;
+    cursor: pointer; 
 }
 .modal {
     display: none; /* Masque la modale par défaut */
@@ -145,6 +146,7 @@ header {
     text-transform: uppercase;
     line-height:68px;
     padding: 10px 0 20px 0;
+    cursor: default;
   }
 
   .line {
@@ -171,6 +173,7 @@ header {
     display: flex;
     flex-direction: column;  
     align-items: center;
+    
 }
 #your-message {
     margin-right: 18px;
@@ -185,6 +188,7 @@ header {
     width: 100%;
     background-color: #D8D8D8;
     padding:15px 8px ;
+    cursor: pointer;
 
 }
 
@@ -237,6 +241,7 @@ header {
     appearance: none;
     position: relative;
     z-index: 1; /* Assurez-vous que le select ne soit pas masqué par la flèche */
+    cursor: pointer;
 }
 
 /* Style du bouton flèche */
@@ -251,6 +256,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .sort-by-date-filter {
@@ -266,6 +272,7 @@ header {
     flex-wrap: wrap; /* Permet aux éléments de s'enrouler */
     justify-content: center;
     gap: 20px; /* Espacement entre les articles */
+    margin-bottom: 20px;
 }
 .article-item {
     width: calc(50% - 50px); /* Ajuste la largeur des éléments pour compenser l'espacement */
@@ -277,6 +284,14 @@ header {
     max-height: 495px;
     object-fit: cover; /* Couvre le conteneur sans déformation de l'image */
     margin-bottom: -7px;
+}
+/* bouton charger plus */
+.load-more-btn {
+    border: 0px;
+    width: 25%;
+    background-color: #D8D8D8;
+    padding:15px 8px ;
+    cursor: pointer;
 }
 
 /*Footer*/
@@ -299,197 +314,283 @@ header {
 }
 
 
+/* Responsive Design */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* Définir la police SpaceMono Regular */
-@font-face {
-    font-family: 'SpaceMono';
-    src: url('assets/fonts/SpaceMono/SpaceMono-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+/* Cacher le menu par défaut */
+.menu-header {
+    display: none;
 }
 
-/* Définir la police SpaceMono Bold */
-@font-face {
-    font-family: 'SpaceMono';
-    src: url('assets/fonts/SpaceMono/SpaceMono-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
+/* Afficher le menu lorsque 'active' est ajouté */
+.menu-header.active {
+    display: block;  /* Assurer l'affichage du menu */
+    background-color: #E00000;  /* Optionnel : pour avoir un fond visible */
+    position: absolute;  /* Si tu veux que le menu soit superposé */
+    top: 49px;  /* Ajuste la position pour qu'il apparaisse sous le bouton */
+    right: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;  /* Pour s'assurer qu'il soit visible au-dessus des autres éléments */
 }
 
-/* Définir la police SpaceMono Italic */
-@font-face {
-    font-family: 'SpaceMono';
-    src: url('assets/fonts/SpaceMono/SpaceMono-Italic.ttf') format('truetype');
-    font-weight: normal;
-    font-style: italic;
+/* Hamburger menu styles */
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
 }
 
-/* Définir la police SpaceMono Bold Italic */
-@font-face {
-    font-family: 'SpaceMono';
-    src: url('assets/fonts/SpaceMono/SpaceMono-BoldItalic.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-}
-/* Définir la police Poppins Regular */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+.menu-toggle div {
+    width: 30px;
+    height: 2px;
+    background-color: black;
+    margin: 4px 0;
+    transition: 0.4s;
+    position: relative;
 }
 
-/* Définir la police Poppins Bold */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
+/* Animation en croix */
+.menu-toggle.active div:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
 }
 
-/* Définir la police Poppins Bold Italic */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-BoldItalic.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
+.menu-toggle.active div:nth-child(2) {
+    opacity: 0;
 }
 
-/* Définir la police Poppins Italic */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-Italic.ttf') format('truetype');
-    font-weight: normal;
-    font-style: italic;
+.menu-toggle.active div:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+/* Sur les grands écrans (1025px et plus), cacher le hamburger et afficher le menu normalement */
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none;  /* Cacher le bouton hamburger sur grand écran */
+    }
+
+    .menu-header {
+        display: flex;  /* Afficher le menu normalement sur grand écran */
+        position: static;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .menu {
+        display: flex;  /* Le menu est visible en ligne sur grands écrans */
+        flex-direction: row;
+    }
+    
 }
 
-/* Définir la police Poppins Light */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-Light.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
+@media (min-width: 769px) and (max-width: 1024px) {
+    .logo {
+        width: 50%;
+        margin-left: 45px;
+    }
+    .hero-title {
+        font-size: 70px;
+    }
+    .filters-container {
+        width: 92%;
+        justify-content: space-between;
+    }
+    .category-format-filters {
+        width: 49%;
+    }
+    .filters-container__photo-filter {
+        width: 215px;
+    }
+}
+/* Styles de menu pour mobile */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        margin-right: 45px;
+    }
+    .logo {
+        width: 50%;
+        margin-left: 45px;
+    }
+    /* Cacher le menu par défaut sur mobile */
+    .menu-header {
+        display: none;
+    }
+
+    /* Menu visible lorsqu'il a la classe 'active' */
+    .menu-header.active {
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+        background-color: #E00000; 
+    }
+
+    .menu-item {
+        margin: 18px 0;
+    }
+
+    .menu {
+        display:flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    header .menu-item a {
+        font-family: 'SpaceMono', sans-serif;
+        font-size: 44px;
+        color: white;
+    }
+    .modal-content {
+        max-width: 500px;
+    }
+    .line:nth-child(1) {
+        left: -47%;
+    }
+    .hero-img {
+        width: 100%;
+        height: 550px;
+    }
+    .hero-title {
+        font-size: 50px;
+    }
+    .filters-container {
+        width: auto;
+        padding-top: 1.5em;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .category-format-filters {
+        flex-direction: column;
+        width: calc(50% - -130px);
+        height: 140px;
+        position: relative;
+        justify-content: start;
+    }
+    .categories-filter {
+        margin-bottom: 10px;
+    }
+    .sort-by-date-filter {
+        margin-top: -40px;
+    }
+    .article-list {
+        flex-direction: column;
+        align-items: center;
+    }
+    .article-item {
+        width: 90%;
+    }
+    .footer-menu-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 ;
+    }
+    #menu-item-71, #menu-item-72, #menu-item-73 {
+        margin: 15px 0 15px 0;
+    }
 }
 
-/* Définir la police Poppins Light Italic */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-LightItalic.ttf') format('truetype');
-    font-weight: 300;
-    font-style: italic;
+/* Pour les écrans très petits (moins de 480px) */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 20px;
+        -webkit-text-stroke: 0.8px white;
+    }
+    .logo {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+    .menu-toggle {
+        display: flex;
+        margin-right: 0px;
+    }
+    .modal-content {
+        max-width: 300px;
+    }
+    .line:nth-child(1) {
+        left: -27%;
+    }
+    .hero-img {
+        width: 100%;
+        height: 250px;
+    }
+    .menu {
+        flex-direction: column;
+    }
+
+    .menu-item {
+        margin: 5px 0;
+    }
+
+    .filters-container {
+        padding-top: 2em;
+    }
+
+    .filters-container__photo-filter {
+        width: 100%;
+    }
+
+    .form-container {
+        width: 75%;
+        padding-left: 30px;
+    }
+
+    .formulaire {
+        width: 100%;
+    }
+    .form-submit {
+        padding-left: 10px;
+    }
+    .filters-container {
+        padding-top: 1.5em;
+        width: 80%;
+    }
+    .categories-filter {
+        width: 100%;
+    }
+    .category-format-filters {
+        width: calc(50% - -170px);
+    }
+    #sort-by-date {
+     width: 179%;
+    }
+    .article-image img {
+    height: 360px;
+    max-height: 360px;
+    }
 }
 
-/* Définir la police Poppins Medium */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
+@media (max-width: 375px) {
+    .category-format-filters {
+        width: calc(50% - -150px);
+    }
+    #sort-by-date {
+        width: 158%;
+    }
+    .article-image img {
+        height: 300px;
+        max-height: 300px;
+        }
 }
 
-/* Définir la police Poppins Medium Italic */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-MediumItalic.ttf') format('truetype');
-    font-weight: 500;
-    font-style: italic;
-}
-
-/* Définir la police Poppins SemiBold */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-SemiBold.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
-}
-
-/* Définir la police Poppins SemiBold Italic */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-SemiBoldItalic.ttf') format('truetype');
-    font-weight: 600;
-    font-style: italic;
-}
-
-/* Définir la police Poppins ExtraBold */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-ExtraBold.ttf') format('truetype');
-    font-weight: 800;
-    font-style: normal;
-}
-
-/* Définir la police Poppins ExtraBold Italic */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-ExtraBoldItalic.ttf') format('truetype');
-    font-weight: 800;
-    font-style: italic;
-}
-
-/* Définir la police Poppins ExtraLight */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-ExtraLight.ttf') format('truetype');
-    font-weight: 200;
-    font-style: normal;
-}
-
-/* Définir la police Poppins ExtraLight Italic */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-ExtraLightItalic.ttf') format('truetype');
-    font-weight: 200;
-    font-style: italic;
-}
-
-/* Définir la police Poppins Thin */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-Thin.ttf') format('truetype');
-    font-weight: 100;
-    font-style: normal;
-}
-
-/* Définir la police Poppins Thin Italic */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-ThinItalic.ttf') format('truetype');
-    font-weight: 100;
-    font-style: italic;
-}
-
-/* Définir la police Poppins Black */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-Black.ttf') format('truetype');
-    font-weight: 900;
-    font-style: normal;
-}
-
-/* Définir la police Poppins Black Italic */
-@font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins/Poppins-BlackItalic.ttf') format('truetype');
-    font-weight: 900;
-    font-style: italic;
-}
-
-/* Appliquer la police Poppins sur le corps du texte */
-body {
-    font-family: 'Poppins', sans-serif;
+@media (max-width: 320px) {
+    .category-format-filters {
+        width: calc(50% - -128px);
+    }
+    #sort-by-date {
+        width: 135%;
+    }
+    .article-image img {
+        height: 200px;
+        max-height: 200px;
+        }
+    .load-more-btn {
+        width: 30%;
+    }
 }
