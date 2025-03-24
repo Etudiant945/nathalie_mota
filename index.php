@@ -1,12 +1,42 @@
 <?php get_header(); ?>
 
+<section class="hero-section">
+    <div class="hero-image">
+        <?php 
+        // Inclure le fichier contenant le tableau des images
+       // include(get_template_directory() . '/templates_part/image-array.php'); // Modifie le chemin ici
+
+        // Choisir une image aléatoire à partir du tableau
+      //  $random_image = $hero_images[array_rand($hero_images)]; 
+      $query = new WP_Query(
+        array(
+            'post_type' => 'photo',
+            'posts_per_page' => 1,
+            'orderby' => 'rand', 
+        )
+        );
+        if ($query->have_posts()) :
+            while ($query->have_posts()) : $query->the_post();
+        $random_image = get_field('photo'); 
+        ?>
+
+        <img src="<?php echo esc_url($random_image); ?>" alt="Image aléatoire de photographe" class="hero-img">
+
+        <div class="hero-overlay">
+            <h1 class="hero-title">Photographe event</h1>
+        </div>
+    </div>
+    <?php endwhile; endif; ?>
+</section>
+
+
 <section class="container filters-and-posts-container">
     <div class="filters-container">
         <div class="category-format-filters">
             <!-- Filter Categories -->
             <div class="categories-filter">
-                <form class="filter-column" method="GET">
-                    <select id="categories" name="categorie" class="filters-container__photo-filter" onchange="this.form.submit()">
+                <form class="filter-column" id="category-filter">
+                    <select id="categories" name="categorie" class="filters-container__photo-filter">
                         <option value="all" hidden></option>
                         <option value="all" selected>CATÉGORIES</option>
                         <?php
@@ -27,8 +57,8 @@
 
             <!-- Filter Formats -->
             <div class="formats-filter">
-                <form class="filter-column" method="GET">
-                    <select id="formats" name="format" class="filters-container__photo-filter" onchange="this.form.submit()">
+                <form class="filter-column" id="format-filter">
+                    <select id="formats" name="format" class="filters-container__photo-filter">
                         <option value="all" hidden></option>
                         <option value="all" selected>FORMATS</option>
                         <?php
@@ -50,8 +80,8 @@
 
         <!-- Filter Sort By Date -->
         <div class="sort-by-date-filter">
-            <form class="filter-column" method="GET">
-                <select id="sort-by-date" name="sort" class="filters-container__photo-filter" onchange="this.form.submit()">
+            <form class="filter-column" id="sort-filter">
+                <select id="sort-by-date" name="sort" class="filters-container__photo-filter">
                     <option value="all" hidden></option>
                     <option value="all" selected>TRIER PAR</option>
                     <option value="DESC" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'DESC') ? 'selected' : ''; ?>>Les Plus Récentes</option>
@@ -63,72 +93,36 @@
             </form>
         </div>
     </div>
+    
 </section>
 
 
 <section class="container article-list" id="article-list"> 
-<?php
-// Arguments pour la requête WordPress
-$args = array(
-    'post_type' => 'photo',
-    'posts_per_page' => 8, 
-    'paged' => 1, // On commence à la page 1
-);
-
-// Si un filtre est appliqué
-if (isset($_GET['categorie']) && $_GET['categorie'] != 'all') {
-    $args['tax_query'][] = array(
-        'taxonomy' => 'categorie',
-        'field' => 'slug',
-        'terms' => sanitize_text_field($_GET['categorie']),
-    );
-}
-
-if (isset($_GET['format']) && $_GET['format'] != 'all') {
-    $args['tax_query'][] = array(
-        'taxonomy' => 'format',
-        'field' => 'slug',
-        'terms' => sanitize_text_field($_GET['format']),
-    );
-}
-
-if (isset($_GET['sort']) && ($_GET['sort'] == 'ASC' || $_GET['sort'] == 'DESC')) {
-    $args['order'] = $_GET['sort'];
-    $args['orderby'] = 'date';
-}
-
-// Exécution de la requête
-$query = new WP_Query($args);
-
-// Si des articles sont trouvés
-if ($query->have_posts()) :
-    while ($query->have_posts()) : $query->the_post();
-        ?>
-        <article class="article-item">
-            <?php 
-            $image = get_field('photo'); 
-            if ($image) : ?>
-                <div class="article-image">
-                    <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
-                </div>
-            <?php else : ?>
-                <p>Pas d'image disponible</p>
-            <?php endif; ?>
-
-            <div class="article-content"><?php the_excerpt(); ?></div>
-        </article>
-    <?php endwhile; ?>
-    
-    <button id="load-more" class="load-more-btn">Charger plus</button>
-    
-    <?php
-else :
-    echo '<p>Aucun article trouvé.</p>';
-endif;
-
-wp_reset_postdata();
-?>
+    <!-- Les articles vont être chargés ici dynamiquement via AJAX -->
 </section>
+
+<!-- Modale pour afficher l'image agrandie -->
+
+<div id="image-modal" class="image-modal">
+  <span class="close-modal">&times;</span>
+  <span class="modal-arrow modal-prev">
+  &#8592; <!-- fleche gauche -->
+  <p class="arrow"> Précédente </p>
+</span>
+<span class="modal-arrow modal-next">
+<p class="arrow"> Suivante </p>
+&#8594; <!-- fleche droite -->
+</span>
+  <img id="modal-image" alt="Photo agrandie">
+  <div class="modal-caption">
+    <p id="reference-text" class="caption-left"></p>
+    <p id="category-text" class="caption-right"></p>
+  </div>
+</div>
+
+
+                            
+<button id="load-more" class="container filters-and-posts-container load-more-btn">Charger plus</button>
 
 
 <?php get_footer(); ?> 

@@ -31,14 +31,4 @@
     ?>
             </div>
         </div>
-        <section class="hero-section">
-            <div class="hero-image">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/images/nathalie-2.jpeg'); ?>"
-                    alt="Photo de la foule en plein concert" class="hero-img">
-                <div class="hero-overlay">
-                    <h1 class="hero-title">Photographe event</h1>
-                </div>
-            </div>
-        </section>
-
     </header>

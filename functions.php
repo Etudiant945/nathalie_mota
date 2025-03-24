@@ -27,25 +27,12 @@ function ajouter_styles_et_scripts() {
 
     // Charger le script pour le menu hamburger
     wp_enqueue_script('hamburger-menu', get_template_directory_uri() . '/js/menu-hamburger.js', array(), null, true);
+
+     // Charger le script pour l'agrandissement de photo
+     wp_enqueue_script('lightbox', get_template_directory_uri() . '/js/lightbox.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'ajouter_styles_et_scripts');
 
-?>
-<?php // appel de ma fonction js pour mon filtre
-function enqueue_custom_scripts() {
-    // Assurez-vous que jQuery est chargé avant votre script
-    wp_enqueue_script('jquery'); // Inclure jQuery si nécessaire
-
-    // Charger le script personnalisé
-    wp_enqueue_script(
-        'custom-script', // Identifiant pour le script
-        get_template_directory_uri() . '/js/script.js', // Chemin du script
-        array('jquery'), // Dépendance jQuery
-        null, // Version
-        true // Charger dans le footer
-    );
-}
-add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
 ?>
 
 <?php
@@ -57,6 +44,7 @@ function register_my_menus() {
 }
 add_action('init', 'register_my_menus');
 ?>
+
 <?php
 function theme_enqueue_scripts() {
     wp_enqueue_script('filtre', get_template_directory_uri() . '/js/filtre.js', array('jquery'), null, true);
@@ -65,17 +53,17 @@ function theme_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
 function load_more_photos() {
-    // Récupérer les paramètres
+    // Récupérer les paramètres de la requête AJAX
     $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $categorie = isset($_GET['categorie']) ? $_GET['categorie'] : 'all';
     $format = isset($_GET['format']) ? $_GET['format'] : 'all';
     $sort = isset($_GET['sort']) ? $_GET['sort'] : 'DESC';
 
-    // Arguments pour la requête
+    // Arguments pour la requête WordPress
     $args = array(
         'post_type' => 'photo',
         'posts_per_page' => 8,
-        'paged' => $page,  // Utilise le paramètre de page
+        'paged' => $page,  // Utilisation du paramètre de page
     );
 
     // Filtrer par catégorie
@@ -108,29 +96,50 @@ function load_more_photos() {
     if ($query->have_posts()) :
         while ($query->have_posts()) : $query->the_post();
             ?>
-            <article class="article-item">
-                <?php 
-                $image = get_field('photo'); 
-                if ($image) : ?>
-                    <div class="article-image">
-                        <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
-                    </div>
-                <?php else : ?>
-                    <p>Pas d'image disponible</p>
-                <?php endif; ?>
+    
+    <article class="article-item" data-url="<?php echo get_permalink(); ?>">
+    <?php 
+    $image = get_field('photo'); 
+    $reference = get_field('reference');
+    $categories = get_the_terms(get_the_ID(), 'categorie');
+    $category_names = !empty($categories) ? implode(', ', wp_list_pluck($categories, 'name')) : 'Non classé';
+    ?>
+    <div class="article-image">
+        <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
+        
+        <!-- Icône de zoom (qui ouvre la modale) -->
+        <a href="#" class="icon-link enlarge-photo">
+            <img src="<?php echo get_template_directory_uri(); ?>/images/buttons/Icon_zoom.png" alt="Agrandir" class="icon">
+        </a>
+        <!-- Informations affichées au survol -->
+        <div class="overlay">
+            <p class="reference"><?php echo esc_html($reference); ?></p>
+            <p class="categories"><?php echo esc_html($category_names); ?></p>
+        </div>
+        
+        <!-- Icône de redirection (l'icône de l'œil) -->
+        <a href="<?php echo get_permalink(); ?>" class="icon-link">
+            <img src="<?php echo get_template_directory_uri(); ?>/images/buttons/Icon_eye.png" alt="Voir la photo" class="icon">
+        </a>
+    </div>
+    <div class="article-content"></div>
+</article>
 
-                <div class="article-content"><?php the_excerpt(); ?></div>
-            </article>
+
+
         <?php endwhile;
     endif;
 
     wp_reset_postdata();
     
-    die();  // Terminer l'exécution de l'Ajax
+    die();  // Fin de la requête AJAX
 }
 
+
+
+// Définir les actions AJAX
 add_action('wp_ajax_load_more_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
 
-
 ?>
+

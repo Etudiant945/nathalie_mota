@@ -1,5 +1,5 @@
 <footer>
-    <div class="footer-bar"></div> <!-- La barre noire -->
+    <div class="footer-bar"></div>
     <div class="container">
         <nav>
             <?php

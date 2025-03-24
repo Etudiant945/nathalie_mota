@@ -40,7 +40,9 @@ p {
 /* header */
 header {
     text-transform: uppercase;
+    box-shadow: 0 1px 20px 1px rgba(0, 0, 0, 0.05);
 }
+
 
 .header-wrapper {
     display:flex;
@@ -84,7 +86,9 @@ header .menu-item a {
 }
 .hero-img {
     width: 100%;
-    height: 965px;;
+    height: 965px;
+    max-height: 965px;
+    object-fit: cover;
 
 }
 .hero-overlay {
@@ -115,7 +119,6 @@ header .menu-item a {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
     z-index: 1000; /* Place la modale au-dessus des autres éléments */
     
@@ -284,13 +287,17 @@ header .menu-item a {
     max-height: 495px;
     object-fit: cover; /* Couvre le conteneur sans déformation de l'image */
     margin-bottom: -7px;
+    
 }
 /* bouton charger plus */
 .load-more-btn {
+    display: flex;
+    align-items: center;
     border: 0px;
-    width: 25%;
+    width: 272px;
+    height: 50px;
+    margin-bottom: 40px;
     background-color: #D8D8D8;
-    padding:15px 8px ;
     cursor: pointer;
 }
 
@@ -590,7 +597,344 @@ header .menu-item a {
         height: 200px;
         max-height: 200px;
         }
-    .load-more-btn {
-        width: 30%;
-    }
+    
 }
+
+
+/* single Page */ 
+.global-container {
+    width: 1170px;
+    margin: 30px 30px 60px 30px;
+}
+.info-pic {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    min-height: 397px;
+  }
+.info {
+    min-width: 50%;
+    margin-right: 1%;
+    border-bottom: 1px solid;
+    padding:0;
+    margin-bottom: 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.title-pic {
+    font-family: 'space-mono';
+    font-size: 66px;
+    font-weight: 400;
+    line-height: 58px;
+    width: 50%;
+    padding-top: 30px;
+}
+.single-image > img {
+    width: 100%;
+    height: 843px;
+    object-fit: cover;
+}
+.info-margin {
+    font-family: 'space-mono';
+    font-size: 14px;
+    font-weight: 400;
+    margin: 20px 0px;
+}
+
+.ref {
+    margin-top: -30px;
+   
+}
+.year {
+    padding-bottom: 30px;
+}
+.is-interested-text {
+    font-family: 'poppins';
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+    padding-right: 14.3em;
+}
+
+.is-interested {
+    height: 118px;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+
+.is-interested-text-button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.is-interested-button {
+    border: 0px;
+    width: 272px;
+    height: 50px;
+    background-color: #D8D8D8;
+    cursor: pointer;
+}
+.is-interested-slider {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+
+.is-interested-arrows {
+    width: 135px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+  
+.img-container {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 16px;
+}
+
+.previous-img, .next-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+  
+/* You may also like */
+.you-may-also-like {
+    font-family: 'space-mono';
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    line-height: 26.66px;
+    padding-top: 60px;
+    padding-bottom: 20px;
+}
+
+.button-container { 
+    margin: 0 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.all-pics-button {
+    margin-top: 2.5em;
+    margin-bottom: 3em;
+}
+
+
+/* Gallery single page */
+
+.gallery {  
+   display: flex;
+    flex-direction: column;
+}
+
+.gallery-home {  
+    margin: 0 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-container {
+    display: flex ;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.gallery-item {
+    position: relative;
+    width: calc(50% - 10px);
+    max-width: 564px;
+    height: 495px;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+}
+
+.gallery-item img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* overlay photo */ 
+.article-image {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .article-image img {
+    width: 100%;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Overlay avec voile gris et affichage des informations */
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Voile gris à 50% d'opacité */
+    display: flex;
+    justify-content: space-between;  /* Pour espacer la référence et la catégorie */
+    align-items: flex-end;  /* Alignement en bas */
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .article-image:hover .overlay {
+    opacity: 1; /* Affichage du voile au survol */
+  }
+  
+  .overlay p {
+    margin: 0;
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  /* Icône positionnée au centre de l'image */
+.icon-link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem; /* Taille de l'icône */
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Icône invisible par défaut */
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Affichage de l'icône au survol de l'image */
+  .article-image:hover .icon-link {
+    opacity: 1;
+  }
+  
+  /* Style pour l'icône */
+  .icon {
+    width: 50px !important; /* Taille de l'icône, ajuste cette valeur selon tes besoins */
+    height: auto !important;
+  }
+
+  /* Icône d'agrandissement */
+.icon-link {
+    position: absolute;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+}
+
+/* Icône d'agrandissement (zoom) */
+.enlarge-photo {
+    top: 24px;
+    right: 40px; /* Décale l'icône vers la droite */
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+/* Modale pour l'agrandissement de l'image */
+/* Conteneur de la modale */
+.image-modal {
+    display: none;          /* Masquée par défaut */
+    position: fixed;
+    z-index: 1000;          /* Au-dessus des autres éléments */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fond sombre */
+    overflow: auto;         /* Permet de scroller si l'image est trop grande */
+  }
+  
+  /* Image affichée dans la modale */
+  .image-modal img {
+    display: block;
+    margin: 5% auto 0 auto;
+    height: 80%;
+}
+  
+  /* Bouton (croix) pour fermer la modale */
+  .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Conteneur pour la référence + catégorie */
+  .modal-caption {
+    width: 90%;
+    max-width: 1000px;    /* Limite la largeur si vous le souhaitez */
+    margin: 20px auto;    /* Centre horizontalement */
+    display: flex;
+    justify-content: space-between;
+    color: #fff;          /* Texte en blanc */
+    position: relative;   /* Pour pouvoir positionner en bas si nécessaire */
+  }
+  
+  /* Pour placer le texte à gauche et à droite */
+  .caption-left {
+    font-weight: 500;
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  .caption-right {
+    font-weight: 500;
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  .gallery-figure:hover .overlay {
+    opacity: 1;
+  }
+  
+  .gallery-figure:hover .icon-link {
+    opacity: 1;
+  }
+/* Fleches modal */
+
+.modal-arrow {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 60px;
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+    z-index: 1001;
+    transition: background-color 0.3s ease;
+}
+.arrow {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+}
+.modal-prev {
+    left: 10%;
+}
+
+.modal-next {
+    right: 10%;
+}
+  
