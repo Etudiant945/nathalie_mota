@@ -25,7 +25,7 @@
         wp_nav_menu(array(
             'theme_location' => 'header_menu', 
             'container' => 'nav',
-            'container_class' => 'menu-header', // Assure-toi que cette classe est bien là
+            'container_class' => 'menu-header',
             'menu_class' => 'menu', 
         ));
     ?>

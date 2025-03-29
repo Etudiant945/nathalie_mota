@@ -1,5 +1,4 @@
 <div id="contactModal" class="modal">
-    <!-- <span class="close-btn">&times;</span> -->
     <div class="modal-content">
         <div class="contact-form">
             <div class="looping-title">

@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     console.log("Document chargé !");
     
@@ -13,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
     menuToggle.addEventListener("click", function() {
         console.log("Hamburger cliqué !");
         menu.classList.toggle("active");
-        menuToggle.classList.toggle("active"); // Ajoute aussi la classe au bouton
+        menuToggle.classList.toggle("active"); 
         console.log("Classe active ajoutée ?", menu.classList.contains("active"));
     });
 });
