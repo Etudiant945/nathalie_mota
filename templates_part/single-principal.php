@@ -45,20 +45,20 @@
         <div class="is-interested-arrows">
             <?php if ($previousPhoto) : ?>
             <a href="<?php echo get_permalink($previousPhoto); ?>">
-                <img class="arrow arrow_left" src="<?php echo get_template_directory_uri(); ?>/images/Arrow_left.jpg" alt="Flèche gauche" />
+                <img class="arrow arrow_left" src="<?php echo get_template_directory_uri(); ?>/images/buttons/Arrow_left.jpg" alt="Flèche gauche" />
             </a>
             <?php else : ?>
             <img style="opacity:0; cursor: auto;"
-                src="<?php echo get_template_directory_uri(); ?>/images/Arrow_left.jpg" alt="Flèche gauche" />
+                src="<?php echo get_template_directory_uri(); ?>/images/buttons/Arrow_left.jpg" alt="Flèche gauche" />
             <?php endif; ?>
 
             <?php if ($nextPhoto) : ?>
             <a href="<?php echo get_permalink($nextPhoto); ?>">
-                <img class="arrow arrow_right" src="<?php echo get_template_directory_uri(); ?>/images/Arrow_right.jpg" alt="Flèche droite" />
+                <img class="arrow arrow_right" src="<?php echo get_template_directory_uri(); ?>/images/buttons/Arrow_right.jpg" alt="Flèche droite" />
             </a>
             <?php else : ?>
             <img style="opacity:0; cursor: auto;"
-                src="<?php echo get_template_directory_uri(); ?>/images/Arrow_right.jpg" alt="Flèche droite" />
+                src="<?php echo get_template_directory_uri(); ?>/images/buttons/Arrow_right.jpg" alt="Flèche droite" />
             <?php endif; ?>
         </div>
 
