@@ -76,5 +76,6 @@ jQuery(document).ready(function($) {
     });
   
     loadArticles();
+    
   });
   
