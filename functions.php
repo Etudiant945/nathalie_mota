@@ -31,6 +31,8 @@ function mon_theme_enqueue_assets() {
     if (is_front_page() || is_home()) {
         wp_enqueue_script('filtre', get_template_directory_uri() . '/js/filtre.js', ['jquery', 'select2-js'], null, true);
         wp_localize_script('filtre', 'ajaxurl', admin_url('admin-ajax.php'));
+        wp_localize_script('filtre', 'mon_ajax_obj', [    'nonce'    => wp_create_nonce('mon_action_ajax')
+        ]);
     }
 }
 add_action('wp_enqueue_scripts', 'mon_theme_enqueue_assets');
@@ -42,6 +44,11 @@ function load_more_photos() {
     $categorie = sanitize_text_field($_GET['categorie'] ?? 'all');
     $format = sanitize_text_field($_GET['format'] ?? 'all');
     $sort = sanitize_text_field($_GET['sort'] ?? 'DESC');
+
+    if (!isset($_GET['security']) || !wp_verify_nonce($_GET['security'], 'mon_action_ajax')) {
+        wp_send_json_error('Jeton de sécurité invalide.', 403);
+        return;
+    }
 
     $args = array(
         'post_type' => 'photo',

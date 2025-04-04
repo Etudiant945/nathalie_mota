@@ -31,6 +31,7 @@ jQuery(document).ready(function($) {
         categorie: $('#categories').val(),
         format: $('#formats').val(),
         sort: $('#sort-by-date').val(),
+        security: mon_ajax_obj.nonce,
       };
   
       $.ajax({
